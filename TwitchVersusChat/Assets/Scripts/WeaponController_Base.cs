@@ -36,7 +36,10 @@ public class WeaponController_Base : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        deathTimer -= Time.deltaTime;
+        if (!GameplayManager.SharedInstance.Paused)
+        {
+            deathTimer -= Time.deltaTime;
+        }
 
         if (deathTimer <= 0f)
         {

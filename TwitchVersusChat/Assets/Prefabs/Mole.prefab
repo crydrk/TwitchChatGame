@@ -458,13 +458,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 44.75937}
   m_textInfo:
     textComponent: {fileID: 1576118087}
-    characterCount: 0
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 1
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -1727,23 +1727,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f9e099412745a46b78ed5341482fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  agent: {fileID: 0}
+  Anim: {fileID: 2733051315121685287}
   EnemyName: Mole
   AttackPower: 5
   AttackRate: 1
   Speed: 3.5
   Health: 50
   TextParent: {fileID: 1861052270}
-  SpawnCamera: {fileID: 1965834841785026349}
-  HealthLerpSpeed: 1.5
-  HatAttach: {fileID: 1439348009}
-  HendLeftAttach: {fileID: 1507885835}
-  HandRightAttach: {fileID: 805271898}
+  HealthLerpSpeed: 5
+  MeshObject: {fileID: 9214455130274893488}
+  DamageDisplayDuration: 0.25
   DamagePrefab: {fileID: 2427786012956944610, guid: da0de216ad60c5d46a6b049d61961615,
     type: 3}
   DeathPrefab: {fileID: 3909882206432518598, guid: 9f51e8e68cc9b164abbf8473ed186904,
     type: 3}
   NameText: {fileID: 1576118087}
   HealthSlider: {fileID: 1402981666}
+  SpawnCamera: {fileID: 1965834841785026349}
+  HatAttach: {fileID: 1439348009}
+  HendLeftAttach: {fileID: 1507885835}
+  HandRightAttach: {fileID: 805271898}
   Description: 
 --- !u!54 &2732684518522348036
 Rigidbody:

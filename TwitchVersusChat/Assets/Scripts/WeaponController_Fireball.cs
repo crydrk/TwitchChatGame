@@ -14,12 +14,18 @@ public class WeaponController_Fireball : WeaponController_Base
     {
         base.Update();
 
-        transform.Translate(Vector3.forward * LaunchSpeed * Time.deltaTime);
+        if (!GameplayManager.SharedInstance.Paused)
+        {
+            transform.Translate(Vector3.forward * LaunchSpeed * Time.deltaTime);
+        }
     }
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.layer == 8)
+        int groundLM = LayerMask.NameToLayer("Ground");
+        int enemyLM = LayerMask.NameToLayer("Enemy");
+
+        if (collider.gameObject.layer == groundLM || collider.gameObject.layer == enemyLM)
         {
             SelfDestruct();
         }

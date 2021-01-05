@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+using TwitchLib.Unity;
+
 [System.Serializable]
 public class MinionStackable
 {
@@ -70,21 +72,23 @@ public class MinionCameraManager : MonoBehaviour
         }
         else
         {
-            if (minionStack.Count > 0)
+            if (minionStack.Count > 0 && !GameplayManager.SharedInstance.Paused)
             {
                 MinionStackable minion = minionStack[0];
 
-                isPlayingAlert = true;
-                currentTimer = AlertDuration;
-                MinionArriveText.text = minion.message;
-                Target = minion.MinionCameraPosition;
+                if (minionStack[0].MinionCameraPosition != null)
+                {
+                    isPlayingAlert = true;
+                    currentTimer = AlertDuration;
+                    MinionArriveText.text = minion.message;
+                    Target = minion.MinionCameraPosition;
 
-                StartCoroutine(SetSpawnDisplayWithDelay(1f));
+                    StartCoroutine(SetSpawnDisplayWithDelay(1f));
+                }
 
                 minionStack.RemoveAt(0);
             }
         }
-
     }
 
     public IEnumerator SetSpawnDisplayWithDelay(float delay)
@@ -100,4 +104,13 @@ public class MinionCameraManager : MonoBehaviour
         MinionStackable minion = new MinionStackable(message, target);
         minionStack.Add(minion);
     }
+    /*
+
+    public void AddBossToStack(string name)
+    {
+        BossStackable boss = new BossStackable(name);
+        bossStack.Add(boss);
+    }
+
+    */
 }

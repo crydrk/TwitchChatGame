@@ -26,11 +26,16 @@ public class FireControl : MonoBehaviour
 
     void Update()
     {
+        if (GameplayManager.SharedInstance.Paused)
+        {
+            return;
+        }
+
         if (Input.GetAxis("Fire1") > 0f)
         {
             if (weaponCooldown <= 0.0f)
             {
-                GameObject projectile = ObjectPooler.SharedInstance.GetPooledObject();
+                GameObject projectile = ObjectPooler.SharedInstance.GetPooledObject(0);
                 if (projectile != null)
                 {
                     projectile.transform.position = WeaponSource.position;

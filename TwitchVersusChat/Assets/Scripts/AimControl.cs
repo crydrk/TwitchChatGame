@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class AimControl : MonoBehaviour
 {
     public static AimControl SharedInstance;
@@ -21,7 +22,9 @@ public class AimControl : MonoBehaviour
         RaycastHit hit;
         Ray ray = CameraRigContainer.MainCamera.ScreenPointToRay(Input.mousePosition);
 
-        int layerMask = 1 << GroundLayerIndex;
+        int groundLM = 1 << LayerMask.NameToLayer("Ground");
+        int enemyLM = 1 << LayerMask.NameToLayer("Enemy");
+        int layerMask = groundLM | enemyLM;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {

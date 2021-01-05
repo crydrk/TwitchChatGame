@@ -238,13 +238,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 44.75937}
   m_textInfo:
     textComponent: {fileID: 3959160067998130764}
-    characterCount: 0
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 1
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -356,23 +356,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f9e099412745a46b78ed5341482fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  agent: {fileID: 0}
+  Anim: {fileID: 5484522934262277502}
   EnemyName: Cactus
   AttackPower: 5
   AttackRate: 1.5
   Speed: 3
   Health: 50
   TextParent: {fileID: 7862041710770219439}
-  SpawnCamera: {fileID: 7617659913286387280}
-  HealthLerpSpeed: 1.5
-  HatAttach: {fileID: 5975157087083685701}
-  HendLeftAttach: {fileID: 8411881989431680299}
-  HandRightAttach: {fileID: 5745322166207727468}
+  HealthLerpSpeed: 5
+  MeshObject: {fileID: 6816814254793202885}
+  DamageDisplayDuration: 0.25
   DamagePrefab: {fileID: 2427786012956944610, guid: da0de216ad60c5d46a6b049d61961615,
     type: 3}
   DeathPrefab: {fileID: 3909882206432518598, guid: 9f51e8e68cc9b164abbf8473ed186904,
     type: 3}
   NameText: {fileID: 3959160067998130764}
   HealthSlider: {fileID: 2564113576639000255}
+  SpawnCamera: {fileID: 7617659913286387280}
+  HatAttach: {fileID: 5975157087083685701}
+  HendLeftAttach: {fileID: 8411881989431680299}
+  HandRightAttach: {fileID: 5745322166207727468}
   Description: 
 --- !u!54 &4160850744863491793
 Rigidbody:

@@ -5,68 +5,28 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class CreatureChase : MonoBehaviour
+public class CreatureChase : EnemyBase
 {
-
-
-    GameObject player;
-    NavMeshAgent agent;
-
-    public string EnemyName = "Mole";
-    public float AttackPower = 1f;
-    public float AttackRate = 1f;
-    public float Speed = 3.5f;
-    public float Health = 50f;
-    public Transform TextParent;
     public Transform SpawnCamera;
-
-    public float HealthLerpSpeed = 1f;
-    private float currentHealth;
-
+    
     public Transform HatAttach;
     public Transform HendLeftAttach;
     public Transform HandRightAttach;
-    public GameObject DamagePrefab;
-    public GameObject DeathPrefab;
-    public TextMeshProUGUI NameText;
-    public Slider HealthSlider;
 
     public string Description = "";
     
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         ProcessCreation(Description);
 
-        player = GameObject.FindWithTag("Player");
-
-        NameText.text = EnemyName;
-
-        currentHealth = Health;
-
-        agent = GetComponent<NavMeshAgent>();
-        agent.speed = Speed;
-
-        InvokeRepeating("Attack", AttackRate, AttackRate);
+        CreatureManager.SharedInstance.AddCreature(this);
     }
-    
-    void Update()
+
+    protected override void Update()
     {
-        // Follow the player
-        agent.SetDestination(player.transform.position);
-
-        // Lerp the health bar nicely
-        HealthSlider.value = Mathf.Lerp(HealthSlider.value, currentHealth / Health, Time.deltaTime * HealthLerpSpeed);
-
-        // Check to see if the enemy died
-        if (currentHealth <= 0f)
-        {
-            GameObject deathExplosion = (GameObject)Instantiate(DeathPrefab);
-            deathExplosion.transform.position = transform.position;
-            Destroy(gameObject);
-        }
-
-        // Aim the text at the main camera at all times
-        TextParent.LookAt(2 * TextParent.position - Camera.main.transform.position);
+        base.Update();
     }
 
     private void ProcessCreation(string input)
@@ -99,28 +59,7 @@ public class CreatureChase : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Projectile")
-        {
-            WeaponController_Base weapon = other.gameObject.GetComponent<WeaponController_Base>();
-            currentHealth -= weapon.Damage;
-            GameObject damageExplosion = (GameObject)Instantiate(DamagePrefab);
-            damageExplosion.transform.position = transform.position;
-        }
-    }
+    
 
-    public void Attack()
-    {
-        RaycastHit hit;
-        
-
-        if (Physics.Raycast(transform.position, PlayerManager.SharedInstance.Player.transform.position - transform.position, out hit, 3f))
-        {
-            if (hit.transform.gameObject.tag == "Player")
-            {
-                PlayerManager.SharedInstance.TakeDamage(AttackPower);
-            }
-        }
-    }
+    
 }

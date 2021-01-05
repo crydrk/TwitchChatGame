@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class PoolableObject
+{
+    public string Name;
+    public GameObject Prefab;
+    public int AmountToPool;
+}
+
 public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler SharedInstance;
 
-    public List<GameObject> pooledObjects;
-    public GameObject objectToPool;
-    public int amountToPool;
+    public List<PoolableObject> PoolableObjects = new List<PoolableObject>();
+    public List<List<GameObject>> PooledObjects = new List<List<GameObject>>();
 
     private void Awake()
     {
@@ -17,22 +24,28 @@ public class ObjectPooler : MonoBehaviour
 
     private void Start()
     {
-        pooledObjects = new List<GameObject>();
-        for (int i = 0; i < amountToPool; i++)
+        int count = 0;
+        foreach (PoolableObject po in PoolableObjects)
         {
-            GameObject obj = (GameObject)Instantiate(objectToPool);
-            obj.SetActive(false);
-            pooledObjects.Add(obj);
+            PooledObjects.Add(new List<GameObject>());
+            for (int i = 0; i < po.AmountToPool; i++)
+            {
+                GameObject obj = (GameObject)Instantiate(po.Prefab);
+                obj.SetActive(false);
+                obj.transform.SetParent(transform);
+                PooledObjects[count].Add(obj);
+            }
+            count += 1;
         }
     }
 
-    public GameObject GetPooledObject()
+    public GameObject GetPooledObject(int index)
     {
-        for (int i = 0; i < pooledObjects.Count; i++)
+        for (int i = 0; i < PooledObjects[index].Count; i++)
         {
-            if (!pooledObjects[i].activeInHierarchy)
+            if (!PooledObjects[index][i].activeInHierarchy)
             {
-                return pooledObjects[i];
+                return PooledObjects[index][i];
             }
         }
 

@@ -72,7 +72,7 @@ public class UDP_Listen : MonoBehaviour
 
                 Debug.Log(text);
 
-                SpawnManager.SharedInstance.ReceiveData(text);
+                //SpawnManager.SharedInstance.ParseData(text);
             }
             catch (Exception err)
             {
